@@ -22,5 +22,4 @@ networks:
 
 volumes:
   app_cc_pgdata:
-    POSTGRES_USER: cc_admin
 
