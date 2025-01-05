@@ -1,0 +1,26 @@
+services:
+  db:
+    restart: always
+    image: postgres:latest
+    container_name: cc_db
+
+    ports:
+      - 5432:5432
+    environment:
+
+      POSTGRES_DB: cc
+      POSTGRES_USER: cc_admin
+      POSTGRES_PASSWORD: 1234
+    volumes:
+      - app_cc_pgdata:/var/lib/postgresql/data
+    networks:
+      - app_cc
+
+networks:
+  app_cc:
+    driver: bridge
+
+volumes:
+  app_cc_pgdata:
+    POSTGRES_USER: cc_admin
+
