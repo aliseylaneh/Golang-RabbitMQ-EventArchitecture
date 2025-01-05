@@ -3,23 +3,34 @@ services:
     restart: always
     image: postgres:latest
     container_name: cc_db
-
     ports:
       - 5432:5432
     environment:
-
       POSTGRES_DB: cc
       POSTGRES_USER: cc_admin
       POSTGRES_PASSWORD: 1234
     volumes:
-      - app_cc_pgdata:/var/lib/postgresql/data
+      - app_cc_PostgresSQL_data:/var/lib/postgresql/data
     networks:
       - app_cc
+
+  rabbitmq:
+    restart: always
+    image: rabbitmq:4.0-management
+    container_name: cc_rabbitmq
+    ports:
+      - 5672:5672
+      - 15672:15672
+    volumes:
+      - app_cc_RabbitMQ_data:/var/lib/rabbitmq
+    networks:
+      - app_cc
+
 
 networks:
   app_cc:
     driver: bridge
 
 volumes:
-  app_cc_pgdata:
-
+  app_cc_PostgresSQL_data:
+  app_cc_RabbitMQ_data:
